@@ -43,7 +43,10 @@ Development files for the Apache Yetus library.
 
 %build
 export MAVEN_HOME=/usr/share/xmvn
-%mvn_build
+%mvn_build \
+	--skip-install \
+	--skip-tests \
+	-- -pl audience-annotations-component -am
 
 %install
 
