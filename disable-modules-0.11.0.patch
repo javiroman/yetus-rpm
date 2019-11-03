@@ -1,0 +1,19 @@
+diff -upNr yetus-project-0.11.0-vanilla/pom.xml yetus-project-0.11.0/pom.xml
+--- yetus-project-0.11.0-vanilla/pom.xml	2019-08-23 23:19:15.000000000 +0000
++++ yetus-project-0.11.0/pom.xml	2019-11-03 10:04:46.770012048 +0000
+@@ -319,15 +319,7 @@
+   </reporting>
+ 
+   <modules>
+-    <module>yetus-minimaven-plugin</module>
+-    <module>yetus-assemblies</module>
+     <module>audience-annotations-component</module>
+-    <module>precommit</module>
+-    <module>releasedocmaker</module>
+-    <module>shelldocs</module>
+-    <module>asf-site-src</module>
+-    <module>yetus-dist</module>
+-    <module>yetus-maven-plugin</module>
+   </modules>
+ 
+ </project>
