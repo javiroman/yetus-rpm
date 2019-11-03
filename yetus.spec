@@ -10,6 +10,8 @@ URL:     https://yetus.apache.org/
 ExclusiveArch: x86_64
 
 Source0: https://archive.apache.org/dist/%{name}/%{version}/apache-%{name}-%{version}-src.tar.gz
+Source1: audience-annotations-pom-template.xml
+Source2: audience-annotations-jdiff-pom-template.xml
 
 Patch1: disable-modules-%{version}.patch 
 
@@ -53,10 +55,20 @@ install -pm 644 \
         audience-annotations-component/audience-annotations-jdiff/target/audience-annotations-jdiff-%{version}.jar \
 	%{buildroot}%{_javadir}/audience-annotations-jdiff.jar
 
+mkdir -p %{buildroot}%{_mavenpomdir}
+install -pm 644 %{SOURCE1} %{buildroot}%{_mavenpomdir}/JPP-audience-annotations.pom
+install -pm 644 %{SOURCE2} %{buildroot}%{_mavenpomdir}/JPP-audience-annotations-jdiff.pom
+sed -i "s|@version@|%{version}|" %{buildroot}%{_mavenpomdir}/JPP-audience-annotations.pom
+sed -i "s|@version@|%{version}|" %{buildroot}%{_mavenpomdir}/JPP-audience-annotations-jdiff.pom
+%add_maven_depmap JPP-audience-annotations.pom audience-annotations.jar
+%add_maven_depmap JPP-audience-annotations-jdiff.pom audience-annotations-jdiff.jar
+
 %files
 %license LICENSE
 %doc NOTICE
 %{_javadir}/*.jar
+%{_mavenpomdir}/*
+%{_datadir}/maven-metadata/*
 
 %files javadoc
 %{_javadocdir}/%{name}
